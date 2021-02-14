@@ -9,7 +9,7 @@ class TestEasyquotation(unittest.TestCase):
         cases = ["sina", "qq"]
         for src in cases:
             q = easyquotation.use(src)
-            data = q.all_market
+            data = q.market_snapshot(prefix=True)
             for k in data.keys():
                 self.assertRegex(k, r"(sh|sz)\d{6}")
 
@@ -17,7 +17,7 @@ class TestEasyquotation(unittest.TestCase):
         cases = ["sina", "qq"]
         for src in cases:
             q = easyquotation.use(src)
-            data = q.all
+            data = q.market_snapshot()
             for k in data.keys():
                 self.assertRegex(k, r"\d{6}")
 
@@ -32,6 +32,7 @@ class TestHqouteQuotatin(unittest.TestCase):
         excepted = {
             "00700": {
                 "amount": 41115421.0,
+                "dtd": -0.63,
                 "high": 417.0,
                 "lastPrice": 412.2,
                 "lotSize": 100.0,
@@ -43,6 +44,7 @@ class TestHqouteQuotatin(unittest.TestCase):
             },
             "00980": {
                 "amount": 825000.0,
+                "dtd": 0.42,
                 "high": 2.44,
                 "lastPrice": 2.38,
                 "lotSize": 100.0,

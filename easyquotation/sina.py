@@ -1,7 +1,7 @@
 # coding:utf8
-import random
 import re
 import time
+
 from . import basequotation
 
 
@@ -23,12 +23,12 @@ class Sina(basequotation.BaseQuotation):
 
     @property
     def stock_api(self) -> str:
-        return f"http://hq.sinajs.cn/rn={int(time.time()*1000)}&list="
-
+        return f"http://hq.sinajs.cn/rn={int(time.time() * 1000)}&list="
 
     def format_response_data(self, rep_data, prefix=False):
         stocks_detail = "".join(rep_data)
         stocks_detail = self.del_null_data_stock.sub('', stocks_detail)
+        stocks_detail = stocks_detail.replace(' ', '')
         grep_str = self.grep_detail_with_prefix if prefix else self.grep_detail
         result = grep_str.finditer(stocks_detail)
         stock_dict = dict()
